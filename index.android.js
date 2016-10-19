@@ -4,7 +4,7 @@
  * @flow
  */
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, Alert } from 'react-native';
 import Button from './src/component/Button';
 
 class AwesomeProject extends Component {
@@ -22,12 +22,6 @@ class AwesomeProject extends Component {
 
   render() {
     return (
-
-      // <View style={{alignItems: 'center', height: 60, backgroundColor: 'powderblue'}}>
-      //   <Greeting name='Rexxar' />
-      //   <Greeting name='Jaina' />
-      //   <Greeting name='Valeera' />
-      // </View>
       <View style={{flex: 1}}>
         <View style={{flex: 1, backgroundColor: 'powderblue'}} />
         <View style={{flex: 3, backgroundColor: 'skyblue'}} />
