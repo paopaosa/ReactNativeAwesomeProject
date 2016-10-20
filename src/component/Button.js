@@ -2,41 +2,53 @@
  * Created by user on 2016/10/18.
  */
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight, Alert } from 'react-native';
 
 export default class Button extends Component {
   constructor(props) {
     super(props);
     //Initial
-    this.state = { status: 1};
+    this.state = { status: 1, defaultColor: 'orangered' };
   }
 
-  customPress = ()=> {
+  customPress = (e)=> {
     // alert('click something.');
-    Alert.alert(
-      'My Demo',
-      'My Demo Alert.',
-      [{text: '确定', onPress: ()=> {
-        console.log('confirm clicked.')
-      },}]);
+    // Alert.alert(
+    //   'My Demo',
+    //   'My Demo Alert.',
+    //   [{text: '确定', onPress: ()=> {
+    //     console.log('confirm clicked.')
+    //   },}]);
+    e();
   };
 
   // customPress = Alert.alert('My Demo', 'My Demo Alert.',[ text: '确定']);
 
   render() {
     // 解构
-    const { title } = this.props;
+    const { title, color, onPress } = this.props;
     return (
-      <TouchableHighlight
-        style={styles.button}
-        onPress={this.customPress}
+      <TouchableOpacity
+        activeOpacity={0.71}
+
+        style={[styles.button, { backgroundColor:color }]}
+        onPress={onPress}
       >
         <Text style={styles.buttonTitle}>{title}</Text>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   }
 }
+
+Button.propTypes = {
+  color: React.PropTypes.string
+};
+
+// Specifies the default values for props:
+Button.defaultProps = {
+  color : 'orangered'
+};
 
 const styles = StyleSheet.create({
   confirmArea: {
@@ -50,7 +62,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     borderRadius: 20,
-    backgroundColor: 'orangered',
+    // backgroundColor: 'orangered',
     marginBottom: 5,
     marginLeft: 10,
     marginRight: 10,
