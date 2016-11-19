@@ -6,18 +6,17 @@
  import React, { Component } from 'react';
  import { AppRegistry, StyleSheet, Text, View, Alert } from 'react-native';
  import Button from './src/component/Button';
- import MyMap from './src/component/MyMap';
+ // import MyMap from './src/component/MyMap';
 
  class AwesomeProject extends Component {
   customPress = () => {
     Alert.alert(
       '提示',
       '你是否要上传此文件.',
-      [
-      {text: '稍后再问', onPress: () => console.log('Ask me later pressed')},
+      [{text: '稍后再问', onPress: () => console.log('Ask me later pressed')},
       {text: '取消', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-      {text: '确定', onPress: () => console.log('OK Pressed')},
-      ])
+      {text: '确定', onPress: () => console.log('OK Pressed')},]
+      )
   };
 
   // customPress = Alert.alert('My Demo', 'My Demo Alert.',[ text: '确定']);
@@ -31,7 +30,7 @@
         </Text>
       </View>
       <View style={{flex: 3, backgroundColor: 'snow'}}>
-        {/*<MyMap/>*/}
+        // {<MyMap/>}
       </View>
       <View style={[
         {flex: 2},

@@ -6,6 +6,13 @@ import React, { Component, PropTypes } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight, Alert } from 'react-native';
 
 export default class Button extends Component {
+  // static defaultProps = {
+  //   color : 'orangered',
+  //   height : 44,
+  // };
+  // static  propTypes = {
+  //
+  // }
   constructor(props) {
     super(props);
     //Initial
@@ -27,12 +34,11 @@ export default class Button extends Component {
 
   render() {
     // 解构
-    const { title, color, onPress } = this.props;
+    const { title, color, onPress, style } = this.props;
     return (
       <TouchableOpacity
         activeOpacity={0.71}
-
-        style={[styles.button, { backgroundColor:color }]}
+        style={[styles.button, { backgroundColor:color, height:style.height}]}
         onPress={onPress}
       >
         <Text style={styles.buttonTitle}>{title}</Text>
@@ -42,12 +48,14 @@ export default class Button extends Component {
 }
 
 Button.propTypes = {
-  color: React.PropTypes.string
+  color: React.PropTypes.string.isRequired,
+  height: React.PropTypes.number,
 };
 
 // Specifies the default values for props:
 Button.defaultProps = {
-  color : 'orangered'
+  color : 'orangered',
+  height : 44,
 };
 
 const styles = StyleSheet.create({
@@ -61,15 +69,15 @@ const styles = StyleSheet.create({
     // width: 100,
     flex: 1,
     justifyContent: 'center',
-    borderRadius: 20,
-    // backgroundColor: 'orangered',
+    borderRadius: 22,
     marginBottom: 5,
     marginLeft: 10,
     marginRight: 10,
   },
   buttonTitle: {
-    fontSize: 20,
+    fontSize: 15,
     textAlign: 'center',
     color: 'white',
+    backgroundColor: 'transparent',
   },
 });
