@@ -38,7 +38,8 @@ export default class Button extends Component {
     return (
       <TouchableOpacity
         activeOpacity={0.71}
-        style={[styles.button, { backgroundColor:color, height:style.height}]}
+        style={[styles.button,{ backgroundColor:color, height:style.height }]}
+        // underlayColor="#eeb8a5"
         onPress={onPress}
       >
         <Text style={styles.buttonTitle}>{title}</Text>
@@ -55,7 +56,7 @@ Button.propTypes = {
 // Specifies the default values for props:
 Button.defaultProps = {
   color : 'orangered',
-  height : 44,
+  style : { height: 44 },
 };
 
 const styles = StyleSheet.create({

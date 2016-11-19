@@ -6,6 +6,10 @@ import { ScrollView,Image,Text,View,StyleSheet } from 'react-native';
 import Button from '../component/Button';
 
 class MyScene extends Component {
+  handleOptionsButtonClick = (e) => {
+    console.log("click button.")
+  }
+
   render() {
     let { title } = this.props;
     // return (
@@ -14,7 +18,7 @@ class MyScene extends Component {
     //   </View>
     // );
     return (
-      <ScrollView style={{margin: 20, top: 20, bottom: 30, borderWidth: 1, borderColor: '#E1E2F3' }}>
+      <ScrollView style={styles.container} >
         <Image source={{uri: 'https://i.chzbgr.com/full/7345954048/h7E2C65F9/' }} />
         <Text style={[styles.base,{paddingTop: 0}]}>
           {"\n"}
@@ -27,19 +31,19 @@ class MyScene extends Component {
           On Android, it uses a native ImageView.
           {"\n"}
         </Text>
-        <Text style={styles.base}>
+        <Text style={[styles.base,{ color: 'gray' }]}>
           React Native wraps the fundamental native components, giving you
           the performance of a native app, plus the clean design of React.
           {"\n"}
           React Native wraps the fundamental native components, giving you
           the performance of a native app, plus the clean design of React.
           {"\n"}
-          Hello world.{"\n"}Hello React Native.
+          <Text style={styles.titleStyle}>Hello world.</Text>{"\n"}Hello React Native.
           {"\n"}
           React Native wraps the fundamental native components, giving you
           the performance of a native app, plus the clean design of React.
         </Text>
-        <Button style={{ height: 80 }} title={title} color={'#e86b4e'} onPress={this.handleOptionsButtonClick} />
+        <Button style={{ height: 50 }} title={title} color={'#e86b4e'} onPress={this.handleOptionsButtonClick} />
       </ScrollView>
     );
   }
@@ -62,7 +66,19 @@ const styles = StyleSheet.create({
   },
   base: {
     padding: 10,
-  }
+  },
+  container: {
+    margin: 20, 
+    marginTop: 40, 
+    top: 0, 
+    bottom: 30, 
+    borderWidth: 1, 
+    borderColor: '#E1E2F3' 
+  },
+  titleStyle: {
+    color: 'mediumslateblue',
+    fontSize: 33,
+  },
 })
 
 export default MyScene;
