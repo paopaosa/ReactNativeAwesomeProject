@@ -4,122 +4,65 @@
  * @flow
  */
 
-// import React, { Component } from 'react';
-// import { AppRegistry, Text, View } from 'react-native';
-
-// class Blink extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {displayText: true};
-
-//     // Toggle the state every second
-//     setInterval(() => {
-//       this.setState({ displayText: !this.state.displayText });
-//     }, 1000);
-//   }
-
-//   render() {
-//     let display = this.state.displayText ? this.props.text : ' ';
-//     return (
-//       <Text>{display}</Text>
-//     );
-//   }
-// }
-
-// class AwesomeProject extends Component {
-//   render() {
-//     return (
-//       <View>
-//         <Blink text='  ' />
-//         <Blink text='I love to blink.' />
-//         <Blink text='Yes blinking is so great' />
-//         <Blink text='Why did they ever take this out of HTML' />
-//         <Blink text='Look at me look at me look at me' />
-//       </View>
-//     );
-//   }
-// }
-
-// AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
-
-// import React, { Component } from 'react'
-// import { AppRegistry, StyleSheet, Image, ScrollView, Text, TouchableHighlight } from 'react-native'
-// import Button from './src/component/Button'
-// var marginSize = 20
-// class AwesomeProject extends Component {
-//   handleOptionsButtonClick = (e) => {
-//     console.log('click ...' + e)
-//     // this.setState({showOptionsModal: true});
-//   }
-//   render() {
-//     this.marginSize = 30
-//     return (
-//       <ScrollView style={{top: 20, bottom: 40, margin: 2, borderWidth: 1, borderColor: '#E1E2F3' }}>
-//         <Image source={{uri: 'https://i.chzbgr.com/full/7345954048/h7E2C65F9/' }} />
-//         <Text style={[styles.base,{paddingTop: 12}]}>
-//           On iOS, a React Native ScrollView uses a native UIScrollView.
-//           On Android, it uses a native ScrollView.{"\n"}
-//         </Text>
-//         <Text style={styles.base}>
-//           {"\n"}
-//           On iOS, a React Native Image uses a native UIImageView.
-//           On Android, it uses a native ImageView.
-//           {"\n"}
-//         </Text>
-//         <Text style={styles.base}>
-//           React Native wraps the fundamental native components, giving you
-//           the performance of a native app, plus the clean design of React.
-//           {"\n"}
-//           React Native wraps the fundamental native components, giving you
-//           the performance of a native app, plus the clean design of React.
-//           {"\n"}
-//           React Native wraps the fundamental native components, giving you
-//           the performance of a native app, plus the clean design of React.
-//           {"\n"}
-//           React Native wraps the fundamental native components, giving you
-//           the performance of a native app, plus the clean design of React.
-//         </Text>
-//         <TouchableHighlight
-//           // onPress={this.handleOptionsButtonClick.bind(this)}
-//           onPress={e => this.handleOptionsButtonClick(e)}
-//           // onPress={this.handleOptionsButtonClick()}
-//           style={{ alignItems: 'center' }}
-//           >
-//           <Text>AAAAAA</Text>
-//         </TouchableHighlight>
-//         <Button style={{ height: 44 }} title={"OK"} color={'#3e2df0'} onPress={this.handleOptionsButtonClick} />
-//       </ScrollView>
-//     );
-//   }
-// }
-//
-// const styles = StyleSheet.create({
-//   base: {
-//     borderWidth: 1,
-//     borderColor: '#EDEBE0',
-//     borderBottomWidth: 1,
-//     borderTopWidth: 3,
-//     marginLeft: marginSize,
-//     marginRight: marginSize
-//   }
-// })
-// AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
-
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Navigator} from 'react-native';
+import { AppRegistry, StyleSheet, Navigator, View, Text } from 'react-native';
 import MyScene from './src/scene/MyScene';
+import Profile from './src/scene/Profile';
 
 class SimpleNavigationApp extends Component {
+
+  _onPress = (navigator) => {
+    navigator.push({
+      message: '向右拖拽关闭页面',
+      scene: 'profile',
+      title: 'AAAAA',
+      sceneConfig: Navigator.SceneConfigs.FloatFromRight,
+      showNavigationBar: false,
+    })
+  }
+
   render() {
+    let Sences = {
+      'home' : MyScene,
+      'profile' : Profile,
+    }
     return (
       <Navigator
-        initialRoute={{ title: 'My Initial Scene', index: 0 }}
+        initialRoute={{ title: 'My Home', index: 0 , first: MyScene}}
+        navigationBar = {
+         <Navigator.NavigationBar
+           routeMapper = {{
+             LeftButton: (route, navigator, index, navState) => {
+               return (<Text style={styles.leftButton}>Cancel</Text>); },
+             RightButton: (route, navigator, index, navState) => {
+               return (<Text>Done</Text>); },
+             Title: (route, navigator, index, navState) => {
+               return (<View style={{ alignItems: 'center', justifyContent: 'center', height: 44, }}>
+                <Text style={{ fontSize: 22, color: 'white', textAlign: 'center',}}>{route.title}</Text>
+                </View>); },
+            }}
+          style={{backgroundColor: 'darkseagreen'}}
+         />}
         renderScene={(route, navigator) => {
-          return <MyScene title={route.title} />
+          let Component = route.first;
+          if (!Component) {
+            Component = Profile;
+          }
+          return <Component title={route.title} navigator={navigator}/>
         }}
       />
     );
   }
 }
+
+const styles = StyleSheet.create({
+  leftButton: {
+    color: 'white',
+    textAlign: 'center',
+    width: 80,
+    height: 80,
+    backgroundColor: 'green',
+  }
+})
 
 AppRegistry.registerComponent('AwesomeProject', () => SimpleNavigationApp);
